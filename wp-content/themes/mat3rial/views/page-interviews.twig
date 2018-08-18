@@ -1,0 +1,32 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article>
+		
+			<section class="article-content">
+				
+				<div class="row">
+					<div class="large-4 small-12 columns title">
+						<h1 class="article-h1">Interviews</h1>
+						
+					</div>
+					<div class="large-8 small-12 columns">
+						<div class="row pubs">
+							{% for interview in interviews %}
+								
+									<div class="small-12 large-6 columns publications">
+										<a href="{{interview.permalink}}"><img src="{{interview.thumbnail.src}}" class="publication-image" alt="Image for {{interview.post_title}}" /></a>
+										<h2 ><a href="{{interview.permalink}}">{{ interview.post_title }}</a></h2>
+										<p>{{interview.post_excerpt}}</p>
+									
+									</div>
+								
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

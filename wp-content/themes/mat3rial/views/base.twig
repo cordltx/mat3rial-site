@@ -1,0 +1,74 @@
+{% block html_head_container %}
+{% include 'html-header.twig' %}
+{% block head %}
+{% endblock %}</head>
+{% endblock %}
+<body data-template="base.twig">
+	<header class="header" >
+		{% block header %}
+		<div class="sticky">
+			<nav class="top-bar" data-topbar role="navigation">
+			<ul class="title-area">
+			<li class="name">
+				<h1 role="banner">
+					<a href="{{site.url}}" rel="home" alt="MAT3RIAL"><img src="{{site.url}}/wp-content/uploads/2014/10/smalllogo.png"></a>
+				</h1>
+			</li>
+		    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+			</ul>	
+				
+			
+				<section id="nav-main" class="top-bar-section">
+					<ul class="right">
+					{% for item in menu.get_items %}
+						<li class="nav-item {{item.classes | join(' ')}}{% if item.get_children %} has-dropdown{% endif %}">
+							<a class="nav-link" href="{{item.get_link}}">{{item.title}}</a>
+							{% if item.get_children %}
+								<ul class="nav nav-drop dropdown">
+								{% for child in item.get_children %}
+									<li class="nav-drop-item">
+										<a class="nav-link" href="{{child.get_link}}">{{child.title}}</a>
+									</li>
+								{% endfor %}
+								
+								</ul>
+							{% endif %}
+						</li>
+					{% endfor %}
+					</ul>
+				</section><!-- #nav -->
+			</nav>
+		</div>
+		{% endblock %}
+	</header>
+
+	<section id="content" role="main" class="content-wrapper">
+		<!-- {% if title %}<h1>{{title}}</h1>{% endif %} -->
+		<div class="wrapper {{sidebar_class}}">
+			{% block content %}
+				Sorry, no content
+			{% endblock %}
+		</div>
+		{% if sidebar %}
+			<aside class="layout-sidebar">
+				{{sidebar}}
+			</aside>
+		{% endif %}
+	</section>
+
+	{% block footer %}
+		<footer id="footer">
+			{% include 'footer.twig' %}
+		</footer>
+		{{ function('wp_footer') }}{% endblock %}
+<script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+    e.src='https://www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-73193204-1','auto');ga('send','pageview');
+</script>
+<script src="{{theme.link}}/js/app.js"></script>
+</body>
+</html>

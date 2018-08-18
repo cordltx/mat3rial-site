@@ -1,0 +1,74 @@
+/*
+ * Theme Name: MDLP
+ * Description: Theme for Mois De La Photo
+ * Author: mat3rial
+*/
+
+
+/* RESPONSIVE */
+/* Small screens */
+
+@media only screen and (max-width: 55em) { 
+/*	.top-bar.expanded ul.right {
+		margin-top: 0 !important;
+	}
+*/
+	.top-bar .name {
+		height: 85px;
+	}
+
+	/* mat3rial front page first section */
+	.head_text {
+		margin-top: 0 !important;
+		margin-bottom: 25px !important;
+	}
+
+	.fullWidth_header .row {
+		position:relative;
+		top:50%;
+		-webkit-transform:translateY(-50%);
+		-ms-transform:translateY(-50%);
+		transform:translateY(-50%);
+	}
+
+	div.fullWidth_header {
+		overflow: hidden;
+	}
+
+/*	.top-bar .title-area {
+		padding: 10px 0;
+	}
+
+	.top-bar h1>a {
+		margin-top: 0 !important;
+	}
+
+*/	.text_pub_bg {
+		margin:0 !important;
+	}
+
+	.fullWidth_pub {
+		height: auto !important;
+	}
+
+
+} 
+
+/* super tiny screens like Corina's phone */
+@media only screen and (max-width: 15rem) {
+	.subtitle {
+		font-size: .9rem !important;
+	}
+
+	.head_text h2 {
+		font-size: 1.5rem !important;
+	}
+	.fullWidth_header {
+		height: auto !important;
+		padding-top: 130px !important;
+	}
+	.fullWidth_header .row {
+		margin-bottom: -100px !important;
+	}
+}
+/* max-width 1024px, use when QAing tablet-only issues */

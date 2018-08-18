@@ -1,0 +1,43 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+				
+		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+				
+				<div class="row">
+					<div class="large-3 small-12 columns title">
+						<h1 class="article-h1">{{post.title}}</h1>
+						<div class="article-body">
+							{{post.content}}
+						</div>
+					</div>
+					<div class="large-9 small-12 columns">
+						<div class="row pubs">
+						
+							{% for category in categories %}
+																
+								
+										<hr/><h3>{{category}}</h3>
+									
+															
+								{% for video in videos %}
+																						
+									{% if video.category == category %}
+										<div class="small-12 large-6 medium-6 columns">				
+											<p>{{video.content}}</p>
+										</div>
+									{% endif %}
+																	
+								{% endfor %}
+							{% endfor %}
+							
+						
+						</div>
+					</div>
+				</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

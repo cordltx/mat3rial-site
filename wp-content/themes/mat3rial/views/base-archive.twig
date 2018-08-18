@@ -1,0 +1,103 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+		<header class="header" >
+			{% block header %}
+			<div class="sticky">
+				<nav class="top-bar" data-topbar role="navigation">
+				<ul class="title-area">
+				<li class="name">
+					<h1 role="banner">
+						<a href="{{site.url}}" rel="home" alt="Le Mois de la Photo"><img src="{{theme.link}}/img/logo_mdlp.png"></a>
+					</h1>
+				</li>
+			    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+				</ul>	
+					<section id="social-bar" class="large-12 small-12" >
+					<ul class="social-menu">
+						<li>// 
+							<a href="https://www.facebook.com/lemoisdelaphoto" target="_blank"><i class="fi-social-facebook" style="color:#fff;"></i></a>
+						</li>
+						<li>// 
+							<a href="https://twitter.com/Mp_mtl" target="_blank"><i class="fi-social-twitter" style="color:#fff;"></i></a>
+						</li>
+						<li>// 
+							{% if wpml_lang == 'fr' %} <a href="https://app.cyberimpact.com/clients/8579/subscribe-forms/46BC8842-01B3-402B-88E0-F39E82E439BB" target="_blank">{% endif %}
+							{% if wpml_lang == 'en' %} <a href="https://app.cyberimpact.com/clients/8579/subscribe-forms/F31819E3-CE88-4D75-AAE4-2079DD788556" target="_blank">{% endif %}
+							<i class="fi-mail" style="color:#fff;"></i></a>
+						</li>
+					</ul>
+				
+					</section>
+				
+					<section id="nav-main" class="top-bar-section">
+						<ul class="right">
+						{% for item in menu.get_items %}
+							<li class="nav-item {{item.classes | join(' ')}}{% if item.get_children %} has-dropdown{% endif %}">
+								<a class="nav-link" href="{{item.get_link}}">{{item.title}}</a>
+								{% if item.get_children %}
+									<ul class="nav nav-drop dropdown">
+									{% for child in item.get_children %}
+										<li class="nav-drop-item">
+											<a class="nav-link" href="{{child.get_link}}">{{child.title}}</a>
+										</li>
+									{% endfor %}
+									
+									</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
+						<li class="nav-item">{% do action('icl_language_selector') %}</li>
+						
+						</ul>		
+					</section><!-- #nav -->			
+				
+<!--second row-->
+        
+        <section class="top-bar-section">
+			<!-- Left Nav Section -->
+			<ul class="left">
+				<li class="active"><a class="global-nav__link">Year</a></li>
+				<li class=""><a class="global-nav__link">About</a></li>
+				<li class=""><a href="artistes-2013" class="global-nav__link">Artists</a></li>
+				<li class=""><a class="global-nav__link">Publication</a></li>
+				    				<li class=""><a class="global-nav__link">Events</a></li>
+               
+			</ul>			
+		</section>
+<!--end second row-->				
+				</nav>
+</div>
+{% endblock %}
+</header>
+
+  
+    
+		<section id="content" role="main" class="content-wrapper">
+			{% if title %}<h1>{{title}}</h1>{% endif %}
+			<div class="wrapper {{sidebar_class}}">
+				{% block content %}
+					Sorry, no content
+				{% endblock %}
+			</div>
+			{% if sidebar %}
+				<aside class="layout-sidebar">
+					{{sidebar}}
+				</aside>
+			{% endif %}
+		</section>
+
+		{% block footer %}
+			<footer id="footer">
+				{% include 'footer.twig' %}
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>

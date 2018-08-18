@@ -1,0 +1,77 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+{% embed "archive_submenu.twig" %}
+{% endembed %}
+
+
+	<div class="content-wrapper">
+		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+			<div class="row">
+			
+				<div class="large-4 small-12 columns title">
+					<h1 class="article-h1">{{biennalepage.biennale_titre}}</h1>
+					
+				</div>
+				
+				<div class="large-8 small-12 columns">
+				
+					<!----- SLIDESHOW ------------------------>
+					
+					<div class="slick-slider">
+						{% for slide in biennalepage.get_field('image_gallery') %}
+						<div>
+							<img src="{{TimberImage(slide.gallery_image).src}}" />
+						</div>
+						{% endfor %}
+					</div>
+				
+				<!----- BIENNALE THEMATIC text --------------->			
+								{{biennalepage.get_field('thematic')}}
+								
+				</div>
+			</div>
+			
+			<div class="row">
+			
+			<!-- GUEST CURATOR AND BIO ----------------->
+				<div class="large-4 small-12 columns title">
+							<h1 class="article-h1"> 	
+								{% if wpml_lang == 'en' %} 
+									GUEST CURATOR 
+								{% elseif wpml_lang == 'fr' %} 
+									 COMMISSAIRE INVIT&Eacute;
+								{% else %} 
+									 COMMISSAIRE INVIT&Eacute;
+								{% endif %}
+							</h1>
+				</div>
+				
+				<div class="large-8 small-12 columns">				
+								<h3>{{biennalepage.commissaire}}</h3>
+								
+									{{biennalepage.get_field('bio_commissaire')}}
+				</div>
+						
+			</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.slick-slider').slick({
+				infinite: true,
+				autoplay: true,
+				arrows: true,
+				focusOnSelect: true,
+				autoplaySpeed: 3000
+			});
+		});
+	</script>
+	
+{% endblock %}

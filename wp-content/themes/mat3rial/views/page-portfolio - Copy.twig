@@ -1,0 +1,80 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article>
+		
+			<section class="article-content">
+				
+				<div class="row">
+					<div class="large-12 small-12 columns title">
+						<h1 class="article-h1">Portfolio</h1>
+						
+					</div>
+					
+					
+					
+					<div class="large-12 small-12 columns">
+					
+					<div class="button-group filter-button-group">
+						<button data-filter="*">show all</button>
+						<button data-filter=".web">web</button>
+						<button data-filter=".storytelling">storytelling</button>
+						<!--<button data-filter=".alkali, .alkaline-earth">alkali & alkaline-earth</button>
+						<button data-filter=":not(.transition)">not transition</button>
+						<button data-filter=".metal:not(.transition)">metal but not transition</button>-->
+					</div>
+					
+						<div class="row pubs grid">
+							{% for portfolio in portfolios %}
+									{% for term in portfolio.terms('categories') %}
+									{% if term.name == 'web' %}
+									
+								
+									<div class="small-12 large-6 columns publications grid-item web">
+										<a href="{{portfolio.permalink}}"><img src="{{portfolio.thumbnail.src}}" class="publication-image" alt="Image for {{portfolio.post_title}}" /></a>
+										<h2 ><a href="{{portfolio.permalink}}">{{ portfolio.post_title }}</a></h2>
+										<p>{{portfolio.post_excerpt}}</p>
+									
+									</div>
+									{% elseif term.name == 'storytelling'  %}
+									
+																	
+									<div class="small-12 large-6 columns publications grid-item storytelling">
+										<a href="{{portfolio.permalink}}"><img src="{{portfolio.thumbnail.src}}" class="publication-image" alt="Image for {{portfolio.post_title}}" /></a>
+										<h2 ><a href="{{portfolio.permalink}}">{{ portfolio.post_title }}</a></h2>
+										<p>{{portfolio.post_excerpt}}</p>
+									
+									</div>
+									{% else %}
+									<div class="small-12 large-6 columns publications grid-item">
+										<a href="{{portfolio.permalink}}"><img src="{{portfolio.thumbnail.src}}" class="publication-image" alt="Image for {{portfolio.post_title}}" /></a>
+										<h2 ><a href="{{portfolio.permalink}}">{{ portfolio.post_title }}</a></h2>
+										<p>{{portfolio.post_excerpt}}</p>
+									
+									</div>
+									{%endif %}
+									
+								{% endfor %}	
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var $grid = $('.grid').isotope({
+			// options
+			itemSelector: '.grid-item',
+			layoutMode: 'fitRows'
+		});
+		// filter items on button click
+		$('.filter-button-group').on( 'click', 'button', function() {
+			var filterValue = $(this).attr('data-filter');
+			$grid.isotope({ filter: filterValue });
+		});
+	</script>
+{% endblock %}

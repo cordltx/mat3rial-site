@@ -1,0 +1,76 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article>
+		
+			<section class="article-content">
+				
+				<div class="row">
+					<div class="large-4 small-12 columns title">
+						<h1 class="article-h1">Portfolio</h1>
+						
+					</div>
+				</div>	
+					
+				<div class="row">	
+					<div class="large-12 small-12 columns">
+					
+					<div class="button-group filter-button-group">
+						<button data-filter="*">show all</button>
+						<button data-filter=".web">web</button>
+						<button data-filter=".storytelling">storytelling</button>
+						<button data-filter=".print">print</button>
+						<button data-filter=".visual">visual identity</button>
+						<!--<button data-filter=".alkali, .alkaline-earth">alkali & alkaline-earth</button>
+						<button data-filter=":not(.transition)">not transition</button>
+						<button data-filter=".metal:not(.transition)">metal but not transition</button>-->
+					</div>
+					
+						<div class="row pubs grid">
+							{% for portfolio in portfolios %}
+									{% set terms = null %}
+									{% set terms2 = null %}
+									{% for term in portfolio.terms('categories') %}
+										
+										 {% set terms = (terms ~ term.name ~ " ")|lower %}
+										 
+									{% endfor %}
+									
+								
+									<!--<div class="small-6 large-2 columns publications grid-item {{terms}}">-->
+									<div class="columns small-12 large-4 grid-item {{terms}}">
+										<a href="{{portfolio.permalink}}"><img src="{{portfolio.thumbnail.src}}" class="publication-image" alt="Image for {{portfolio.post_title}}" /></a>
+										<h2 ><a href="{{portfolio.permalink}}">{{ portfolio.post_title }}</a></h2>
+										<p>{{portfolio.post_excerpt}}</p>
+									
+									</div>
+							{% endfor %}		
+						</div>
+					</div>
+				</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+		var $grid = $('#grid');    
+		
+      $('#grid').isotope({
+			itemSelector: '.grid-item',
+			layoutMode: 'cellsByRow',
+			cellsByRow: {
+				columnWidth: 240,
+				rowHeight: 360
+			}
+		});
+			
+		// filter items on button click
+		$('.filter-button-group').on( 'click', 'button', function() {
+			var filterValue = $(this).attr('data-filter');
+			$grid.isotope({ filter: filterValue });
+		});
+	</script>
+{% endblock %}

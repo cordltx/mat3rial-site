@@ -1,0 +1,60 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+<div class="fullWidth_header2">
+			
+<!-- header -->	
+	<div class="row ">
+		<div class="small-12 large-12 columns head_text">
+		<figure>
+		<h1><img src="{{logo}}" /></h1>
+		</figure>
+			<div class="subtitle">
+				<h2>{% if wpml_lang == 'en' %} ARCHIVE + DESIGN {% elseif wpml_lang == 'fr' %} ARCHIVE + DESIGN {% endif %}</h2>
+				
+			</div>	
+			<p>Design solutions for cultural and non profit organisations, researchers and media practitioners, and social enterprises.
+
+We specialize in digital archives, data visualisation, storytelling, and identity design.</p>
+		</div>		
+	</div><!-- /row -->
+<!-- /header -->	
+
+
+	
+
+<!-- section04 -->
+	<div class="row">
+		<div class="small-12 columns titlesection">
+
+		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+				<div class="small-12 large-12 columns" >
+					{{post.content}}
+				</div>
+				
+			</section>
+		</article>
+		</div>
+	</div><!-- /row -->
+
+<!-- /for portfolio? -->
+<div class="row artistes">
+		<div class="small-12 large-12 columns">
+			<ul>
+			{% for artist in artists %}
+				<li><a href="{{artist.permalink}}">{{ artist.post_title }}</a></li>
+				{% endfor %}
+			</ul>
+			
+		</div>
+	</div><!-- /row -->
+
+
+
+
+
+
+	</div><!-- /fullWidth -->
+{% endblock %}
